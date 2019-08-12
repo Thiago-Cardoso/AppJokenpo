@@ -1,5 +1,5 @@
 import React, {Component } from 'react'
-import { Text, AppRegistry, Button,  View } from 'react-native';
+import { Text, AppRegistry, Image,  Button,  View } from 'react-native';
 
 
 class jokenpo extends Component{
@@ -39,11 +39,11 @@ class jokenpo extends Component{
             }
 
             if(choiceUser == 'paper'){
-              result = 'User Won';
+              result = 'You Won';
            }
 
            if(choiceUser == 'scissors'){
-            result = 'Computer Won';
+            result = 'You Lost';
           } 
         }
 
@@ -53,11 +53,11 @@ class jokenpo extends Component{
             }
 
             if(choiceUser == 'scissors'){
-              result = 'User Won';
+              result = 'You Won';
           }
 
           if(choiceUser == 'stone'){
-            result = 'Computer Won';
+            result = 'You Lost';
           } 
         }
 
@@ -67,11 +67,11 @@ class jokenpo extends Component{
           }
 
           if(choiceUser == 'stone'){
-            result = 'User Won';
+            result = 'You Won';
          }
 
          if(choiceUser == 'stone'){
-          result = 'Computer Won';
+          result = 'You Lost';
         } 
        }
 
@@ -84,16 +84,108 @@ class jokenpo extends Component{
   render(){
     return (
       <View>
-         <Text>Choice of Computer: {this.state.choiceComputer}</Text>
-         <Text>Choice of User: {this.state.choiceUser}</Text>
-         <Text>Result: {this.state.result} </Text>
-         <Button title="stone" onPress={ () => { this.jokenpo('stone') }} />
-         <Button title="paper" onPress={ () => { this.jokenpo('paper') }} />
-         <Button title="scissors" onPress={ () => { this.jokenpo('scissors') }} />
+        <Header></Header>
+        <View style={styles.panelActions}>
+          
+          <View style={styles.btnChoice}>
+              <Button title="stone" onPress={ () => { this.jokenpo('stone') }} />
+          </View>
+          <View style={styles.btnChoice}>
+             <Button title="paper" onPress={ () => { this.jokenpo('paper') }} />
+          </View>
+          <View style={styles.btnChoice}>
+              <Button title="scissors" onPress={ () => { this.jokenpo('scissors') }} />
+          </View>
+
+        </View>
+
+        <View style={styles.stage}>
+         <Text style={styles.txtResult}> {this.state.result} </Text>
+
+         <Icon choice={this.state.choiceComputer} player='computer'></Icon>
+         <Icon choice={this.state.choiceUser} player='you'></Icon>
+
+        </View>
+
       </View>
     );
   }
-
 }
+
+class Header extends Component{
+
+    render(){
+      return (
+        <View>
+            <Image source={require('./imgs/jokenpo.png')} />
+        </View>
+      );
+    }
+}
+
+class Icon extends Component{
+    render(){
+
+        if(this.props.choice == 'stone'){
+          
+          return (
+            <View style={styles.icon} >
+                <Text style={styles.txtPlayer}>{this.props.player}</Text>
+                <Image source={require('./imgs/pedra.png')} />
+            </View>
+
+          );
+
+        }else if(this.props.choice == 'paper'){
+
+          return (
+            <View style={styles.icon}>
+                <Text style={styles.txtPlayer}>{this.props.player}</Text>
+                <Image source={require('./imgs/papel.png')} />
+            </View>
+          );
+
+        }else if (this.props.choice == 'scissors'){
+
+          return (
+            <View style={styles.icon}>
+              <Text style={styles.txtPlayer}>{this.props.player}</Text>
+              <Image source={require('./imgs/tesoura.png')} />
+            </View>
+          );
+
+        }else{
+          return false;
+        }
+    }
+}
+
+const styles = {
+    btnChoice: {
+      width: 90
+    },
+    panelActions: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 10
+    },
+    stage: {
+      alignItems: 'center',
+      marginTop: 10
+    },
+    txtResult: {
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: 'red',
+      height: 60
+    },
+    icon: {
+      alignItems: 'center',
+      marginBottom: 20
+    },
+    txtPlayer: {
+      fontSize: 18
+    }
+  }
 
 AppRegistry.registerComponent('jokenpo', () => jokenpo);
