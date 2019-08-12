@@ -1,6 +1,9 @@
 import React, {Component } from 'react'
-import { Text, AppRegistry, Image,  Button,  View } from 'react-native';
+import { Text, AppRegistry,  Button,  View } from 'react-native';
 
+import Header from './src/components/header'
+
+import Icon from './src/components/icon'
 
 class jokenpo extends Component{
 
@@ -112,54 +115,6 @@ class jokenpo extends Component{
   }
 }
 
-class Header extends Component{
-
-    render(){
-      return (
-        <View>
-            <Image source={require('./imgs/jokenpo.png')} />
-        </View>
-      );
-    }
-}
-
-class Icon extends Component{
-    render(){
-
-        if(this.props.choice == 'stone'){
-          
-          return (
-            <View style={styles.icon} >
-                <Text style={styles.txtPlayer}>{this.props.player}</Text>
-                <Image source={require('./imgs/pedra.png')} />
-            </View>
-
-          );
-
-        }else if(this.props.choice == 'paper'){
-
-          return (
-            <View style={styles.icon}>
-                <Text style={styles.txtPlayer}>{this.props.player}</Text>
-                <Image source={require('./imgs/papel.png')} />
-            </View>
-          );
-
-        }else if (this.props.choice == 'scissors'){
-
-          return (
-            <View style={styles.icon}>
-              <Text style={styles.txtPlayer}>{this.props.player}</Text>
-              <Image source={require('./imgs/tesoura.png')} />
-            </View>
-          );
-
-        }else{
-          return false;
-        }
-    }
-}
-
 const styles = {
     btnChoice: {
       width: 90
@@ -178,13 +133,6 @@ const styles = {
       fontWeight: 'bold',
       color: 'red',
       height: 60
-    },
-    icon: {
-      alignItems: 'center',
-      marginBottom: 20
-    },
-    txtPlayer: {
-      fontSize: 18
     }
   }
 
